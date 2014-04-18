@@ -58,8 +58,8 @@ S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T2
 1. Follow the instruction:
 2. Enter the start address for the write.
 3. Enter the string to be written.
-  - Escape numerical ASCII representations of characters by prefixing them with an `@`.
-  - `@64` is the @ character itself, in case you want to write an actual @.
+  - Escape numerical ASCII representations of characters by prefixing them with an @.
+  - @64 is the @ character itself, in case you want to write an actual @.
 4. The device will print each character submitted to the device.
 5. The device will print a human readable error message for each unsuccessful write.
   - The device will retransmit (including reprint of) the character up to NUM_TRIES times.
