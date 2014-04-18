@@ -26,12 +26,13 @@ Enter the address, or the character 'P'.
 __The Arduino wire library works with 7-bit I²C adresses.__
 
 The Arduino Serial library can easily parse decimal values, not hex codes. Therefore the default T24C02A address 0xA0 is rendered thus:
+
 1. Right-shift one bit to get 7-bit address: 0xA0 >> 1 → 0x50
 2. Convert to decimal: 0x50 → 5×16 + 0 = 80
 
 _If you have a T24C04A, T24C08A or T24C16A, you can change addresses later to write to other memory pages._
 
-##Polling:
+##Polling the I²C bus:
 If you entered the character 'P', the Arduino will poll all 128 possible addresses on the I²C bus.
     It wil show you the address the devices that answered, and their answers.
 
@@ -59,7 +60,6 @@ S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T2
 3. Enter the string to be written.
   - Escape numerical ASCII representations of characters by prefixing them with an '@'.
   - @64 is the @ character itself, in case you want to write an actual @.
-
 4. The device will print each character submitted to the device.
 5. The device will print a human readable error message for each unsuccessful write.
   - The device will retransmit (including reprint of) the character up to NUM_TRIES times.
@@ -73,7 +73,7 @@ S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T2
 ##Setting the I²C address:
 The same procedure as detailed in the section "Getting Started", see above.
 
-##Polling:
+##Polling the I²C bus:
 The same procedure as detailed in the section "Getting Started", see above.
 
 _This polling is not done as part of a change of address. Therefore, the device will give information on the polled devices, and return to the menu immediately afterwards._
