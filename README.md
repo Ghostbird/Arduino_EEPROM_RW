@@ -29,6 +29,8 @@ The Arduino Serial library can easily parse decimal values, not hex codes. There
 1. Right-shift one bit to get 7-bit address: 0xA0 >> 1 → 0x50
 2. Convert to decimal: 0x50 → 5×16 + 0 = 80
 
+_If you have a T24C04A, T24C08A or T24C16A, you can change addresses later to write to other memory pages._
+
 ##Polling:
 If you entered the character 'P', the Arduino will poll all 128 possible addresses on the I²C bus.
     It wil show you the address the devices that answered, and their answers.
@@ -42,7 +44,7 @@ You will be asked for a command char:
     W — Write
     S — Set I²C address
     P — Poll the I²C bus.
-_S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T24C04A, T24C08A or T24C16A IC._
+S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T24C04A, T24C08A or T24C16A IC.
 ##Reading:
 1. Follow the instruction:
   - Enter the start address for the read.
@@ -55,15 +57,13 @@ _S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T
 1. Follow the instruction:
 2. Enter the start address for the write.
 3. Enter the string to be written.
+  - Escape numerical ASCII representations of characters by prefixing them with an '@'.
+  - @64 is the @ character itself, in case you want to write an actual @.
 
-    _Escape numerical ASCII representations of characters by prefixing them with an '@'._
-    _@64 is the @ character itself, in case you want to write an actual @._
-
-- The device will print each character submitted to the device.
-- The device will print a human readable error message for each unsuccessful write.
-- The device will retransmit (including reprint of) the character up to NUM_TRIES times.
-
-    `NUM_TRIES` is set to 10 in the code by default.
+4. The device will print each character submitted to the device.
+5. The device will print a human readable error message for each unsuccessful write.
+  - The device will retransmit (including reprint of) the character up to NUM_TRIES times.
+  - `NUM_TRIES` is set to 10 in the code by default.
 
 ###After ten failed tries:
   - You get an error message indication.
