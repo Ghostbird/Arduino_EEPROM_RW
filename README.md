@@ -53,13 +53,16 @@ You will be asked for a command char:
 ##Writing:
 - Follow the instruction:
   - Enter the start address for the write.
-  - Enter the string to be written. 
+  - Enter the string to be written.
+
     _Escape numerical ASCII representations of characters by prefixing them with an '@'._
     _@64 is the @ character itself, in case you want to write an actual @._
+
 - The device will print each character submitted to the device.
 - The device will print a human readable error message for each unsuccessful write.
 - The device will retransmit (including reprint of) the character up to NUM_TRIES times.
-    _<NUM_TRIES> is set to 10 by default in the code._
+
+    `NUM_TRIES` is set to 10 by default in the code.
 
 __After ten failed tries the device:__
   - Will print an error message indication.
@@ -71,4 +74,5 @@ The same procedure as detailed in the section "Getting Started", see above.
 
 ##Polling:
 The same procedure as detailed in the section "Getting Started", see above.
+
     This polling is not done as part of a change of address. Therefore, the device will give information on the polled devices, and return to the menu immediately afterwards.
