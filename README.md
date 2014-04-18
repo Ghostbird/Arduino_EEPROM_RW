@@ -77,3 +77,19 @@ The same procedure as detailed in the section "Getting Started", see above.
 The same procedure as detailed in the section "Getting Started", see above.
 
 _This polling is not done as part of a change of address. Therefore, the device will give information on the polled devices, and return to the menu immediately afterwards._
+
+#Advanced command usage:
+Due to the way the Arduino Serial library works, you need not wait for the prompt to enter the next command. It reads command characters and numerical characters separately as well thus:
+
+`R11 13` will read thirteen bytes starting at EEPROM address 11.
+
+- Note the space between 11 and 13, otherwise the start address will be set to 1113.
+- Any non-numerical character should work between the numbers, it need not be a space.
+
+`W25Hey!This is a test@64@` will write the string `Hey!This is a test@@` starting at EEPROM address 25.
+
+- Note that the string is written directly after the start address.
+- This method will not work if you want your string to start with a numerical character.
+- The ending may be untuitive, but the first @ is treated as an escape character indication that the next character is the numerical 64 (an @ character). The next @ is the last character on the line. The system will check and see that the Serial buffer is empty, and conclude that it is not an escape character, since it is not followed by a number.
+  - This only works at the end of the string! Any @ followed by a non-numerical character WILL mess up your write command.
+
