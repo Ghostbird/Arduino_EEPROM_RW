@@ -149,7 +149,7 @@ void EEPROM_I2C_write(byte I2C_ADDRESS)
   Serial.println();
 }
 
-byte EEPROM_I2C_setAddress()
+char EEPROM_I2C_setAddress()
 {
   while(true)
   {
