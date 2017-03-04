@@ -26,7 +26,7 @@ void loop()
 }
 
 //Prompt the user for an address on the EEPROM to read from, and the amount of bytes to read from there.
-void EEPROM_I2C_read(byte I2C_ADDRESS)
+void EEPROM_I2C_read(char I2C_ADDRESS)
 {
   Serial.println("Enter EEPROM address (decimal) to read from:");
   while(!Serial.available());
@@ -85,7 +85,7 @@ void EEPROM_I2C_read(byte I2C_ADDRESS)
     Serial.println("Received less than target amount of bytes!");  
 }
 
-void EEPROM_I2C_write(byte I2C_ADDRESS)
+void EEPROM_I2C_write(char I2C_ADDRESS)
 {
   //Constant for the number of tries. With 10 you're fine, I never had 10 write failures in succession.
   const char NUM_TRIES = 10;
