@@ -211,7 +211,7 @@ void EEPROM_I2C_interactive(char address)
       EEPROM_I2C_read(I2C_Address);
     else if (command == 'S')
       //Start the setAddress funtion if the command character was an 'S'.
-      EEPROM_I2C_setAddress();
+      I2C_Address = EEPROM_I2C_setAddress();
     else if (command == 'P')
       //Start the function that polls the I2C bus.
       EEPROM_I2C_pollbus();
