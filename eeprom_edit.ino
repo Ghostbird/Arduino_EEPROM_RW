@@ -26,7 +26,7 @@ void loop()
 }
 
 //Prompt the user for an address on the EEPROM to read from, and the amount of bytes to read from there.
-void EEPROM_I2C_read(char I2C_ADDRESS)
+void EEPROM_I2C_read(char I2C_Address)
 {
   Serial.println("Enter EEPROM address (decimal) to read from:");
   while(!Serial.available());
@@ -50,7 +50,7 @@ void EEPROM_I2C_read(char I2C_ADDRESS)
   while (readcount < amount)
   {
     //Begin a transmission to the I2C device.
-    Wire.beginTransmission(I2C_ADDRESS);
+    Wire.beginTransmission(I2C_Address);
     //Write the address offset by the amount of bytes we've already read.
     Wire.write(address + readcount);
     //Write the buffered transmission, send a restart instead of a stop byte. (see T24C02A datasheet: Random read and Sequential read)
@@ -60,7 +60,7 @@ void EEPROM_I2C_read(char I2C_ADDRESS)
       //Print human readable error message if applicable.
       EEPROM_I2C_printreturncode(result);
     //Request amount-readcount bytes of data from the I2C device (the EEPROM). It will return up to 32 bytes.
-    Wire.requestFrom(int(I2C_ADDRESS),amount-readcount);
+    Wire.requestFrom(int(I2C_Address),amount-readcount);
     //Read the data available on the I2C bus.
     while(Wire.available())
     {
@@ -85,7 +85,7 @@ void EEPROM_I2C_read(char I2C_ADDRESS)
     Serial.println("Received less than target amount of bytes!");  
 }
 
-void EEPROM_I2C_write(char I2C_ADDRESS)
+void EEPROM_I2C_write(char I2C_Address)
 {
   //Constant for the number of tries. With 10 you're fine, I never had 10 write failures in succession.
   const char NUM_TRIES = 10;
@@ -118,7 +118,7 @@ void EEPROM_I2C_write(char I2C_ADDRESS)
     for (char result = 4; result > 0 && tries < NUM_TRIES; tries++)
     {
       //Begin a transmission to the I²C device (the EEPROM).
-      Wire.beginTransmission(I2C_ADDRESS);
+      Wire.beginTransmission(I2C_Address);
       //Write the EEPROM address to the I²C bus, this sets the start address of the write operation.
       Wire.write(address);
       //Write the byte grabbed from the I²C bus.
@@ -184,7 +184,7 @@ char EEPROM_I2C_setAddress()
   }
 }
   
-void EEPROM_I2C_interactive(char I2C_ADDRESS)
+void EEPROM_I2C_interactive(char I2C_Address)
 {
   //Loop forever
   while(true)
@@ -204,10 +204,10 @@ void EEPROM_I2C_interactive(char I2C_ADDRESS)
     char command = Serial.read();
     if (command == 'W')
       //Start the write function if the command character was a 'W'.
-      EEPROM_I2C_write(I2C_ADDRESS);
+      EEPROM_I2C_write(I2C_Address);
     else if (command == 'R')
       //Start the read function if the command character was an 'R'.
-      EEPROM_I2C_read(I2C_ADDRESS);
+      EEPROM_I2C_read(I2C_Address);
     else if (command == 'S')
       //Start the setAddress funtion if the command character was an 'S'.
       EEPROM_I2C_setAddress();
