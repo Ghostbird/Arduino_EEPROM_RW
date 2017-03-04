@@ -184,8 +184,9 @@ char EEPROM_I2C_setAddress()
   }
 }
   
-void EEPROM_I2C_interactive(char I2C_Address)
+void EEPROM_I2C_interactive(char address)
 {
+  char I2C_Address = address;
   //Loop forever
   while(true)
   {
