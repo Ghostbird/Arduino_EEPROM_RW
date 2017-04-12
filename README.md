@@ -1,12 +1,12 @@
 _This manual is released by the author into the public domain._
 
-#T24C02A EEPROM set-up:
+# T24C02A EEPROM set-up:
 - Connect Arduino GND to EEPROM GND.
 - Connect Arduino SDA to EEPROM SDA.
 - Connect Arduino SCL to EEPROM SCL.
 - Connect Arduino 5V  to EEPROM Vcc.
 
-#Arduino set-up:
+# Arduino set-up:
 1. Open the Arduino IDE.
 2. Connect Arduino (I used USB).
 3. Choose correct board and serial port in Arduino IDE.
@@ -17,12 +17,12 @@ _This manual is released by the author into the public domain._
   * If you do not see this prompt, just enter the address.
   * If you don't know the address, enter the character 'P'.
 
-#Getting started:
+# Getting started:
 If you opened the serial console soon enough, you'll be prompted for an I²C address or a 'P'. If you did not open the serial console within four seconds after the Arduino reset, you will not see the prompt, but the Arduino will still patiently wait for your input.
 
 Enter the address, or the character 'P'.
 
-##Setting the I²C address:
+## Setting the I²C address:
 __The Arduino wire library works with 7-bit I²C adresses.__
 
 The Arduino Serial library can easily parse decimal values, not hex codes. Therefore the default T24C02A address 0xA0 is rendered thus:
@@ -32,11 +32,11 @@ The Arduino Serial library can easily parse decimal values, not hex codes. There
 
 _If you have a T24C04A, T24C08A or T24C16A, you can change addresses later to write to other memory pages._
 
-##Polling the I²C bus:
+## Polling the I²C bus:
 If you entered the character 'P', the Arduino will poll all 128 possible addresses on the I²C bus.
     It wil show you the address the devices that answered, and their answers.
 
-#The main menu:
+# The main menu:
 Once you have successfully entered an address, you will arrive in the main shell menu.
 
 You will be asked for a command char:
@@ -46,7 +46,7 @@ You will be asked for a command char:
     S — Set I²C address
     P — Poll the I²C bus.
 S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T24C04A, T24C08A or T24C16A IC.
-##Reading:
+## Reading:
 1. Follow the instruction:
   - Enter the start address for the read.
   - Enter the number of bytes to be read.
@@ -54,7 +54,7 @@ S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T2
 3. Followed by a line of statistics.
   - Optionally followed by a line indicating an error.
 
-##Writing:
+## Writing:
 1. Follow the instruction:
 2. Enter the start address for the write.
 3. Enter the string to be written.
@@ -65,20 +65,20 @@ S is useful if you set the I2C address wrong, have multiple EEPROMs or have a T2
   - The device will retransmit (including reprint of) the character up to NUM_TRIES times.
   - `NUM_TRIES` is set to 10 in the code by default.
 
-###After ten failed tries:
+### After ten failed tries:
   - You get an error message indication.
   - The device skips this address.
   - It continues to write the next character to the next location in the EEPROM.
 
-##Setting the I²C address:
+## Setting the I²C address:
 The same procedure as detailed in the section "Getting Started", see above.
 
-##Polling the I²C bus:
+## Polling the I²C bus:
 The same procedure as detailed in the section "Getting Started", see above.
 
 _This polling is not done as part of a change of address. Therefore, the device will give information on the polled devices, and return to the menu immediately afterwards._
 
-#Advanced command usage:
+# Advanced command usage:
 Due to the way the Arduino Serial library works, you need not wait for the prompt to enter the next command. It reads command characters and numerical characters separately as well thus:
 
 `R11 13` will read thirteen bytes starting at EEPROM address 11.
